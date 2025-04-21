@@ -8,7 +8,8 @@ WORKDIR /app
 COPY package*.json ./
 
 # 🧱 Instalujemy zależności
-RUN npm install
+RUN npm install --include=dev
+
 
 # 📁 Kopiujemy resztę plików backendu do kontenera
 COPY . .
