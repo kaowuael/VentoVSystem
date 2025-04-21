@@ -4,15 +4,11 @@ FROM node:18
 # 📂 Katalog roboczy w kontenerze
 WORKDIR /app
 
-# 📄 Kopiujemy package.json i package-lock.json (jeśli jest)
-COPY package*.json ./
-
-# 🧱 Instalujemy zależności
-RUN npm install --include=dev
-
-
-# 📁 Kopiujemy resztę plików backendu do kontenera
+# 📁 Kopiujemy wszystkie pliki na raz (w tym package.json + src/)
 COPY . .
 
+# 🧱 Instalujemy zależności, w tym dev (nodemon, itp.)
+RUN npm install --include=dev
+
 # 🚀 Domyślna komenda do uruchomienia backendu
-CMD ["npm", "run", "dev"]
+CMD ["node", "src/index.js"]
