@@ -8,6 +8,6 @@ app.use(express.json()); // Parsowanie JSON-ów
 app.get('/ping', (req, res) => res.send('pong!'));
 
 // Uruchomienie serwera
-app.listen(3000, () => {
+app.listen(3000, '0.0.0.0', () => {
   console.log('✅ Backend działa na porcie 3000');
 });
