@@ -1,14 +1,26 @@
-# 📦 Bazowy obraz z Node.js LTS
-FROM node:18
+# 📦 Bazowy obraz: Ubuntu 22.04
+FROM ubuntu:22.04
 
-# 📂 Katalog roboczy w kontenerze
+# 🔧 Ustawienie zmiennych środowiskowych (żeby uniknąć błędów)
+ENV DEBIAN_FRONTEND=noninteractive
+
+# 🛠 Instalujemy Node.js + npm
+RUN apt update && \
+    apt install -y curl && \
+    curl -fsSL https://deb.nodesource.com/setup_18.x | bash - && \
+    apt install -y nodejs
+
+# 📂 Katalog roboczy
 WORKDIR /app
 
-# 📁 Kopiujemy wszystkie pliki na raz (w tym package.json + src/)
-COPY . .
+# 📄 Kopiujemy package.json i lock
+COPY package*.json ./
 
-# 🧱 Instalujemy zależności, w tym dev (nodemon, itp.)
+# 📦 Instalujemy zależności (w tym dev, np. nodemon)
 RUN npm install --include=dev
 
-# 🚀 Domyślna komenda do uruchomienia backendu
+# 📁 Kopiujemy resztę backendu
+COPY . .
+
+# 🚀 Domyślna komenda
 CMD ["node", "src/index.js"]

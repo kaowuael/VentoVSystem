@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   mongo:
-    image: mongo
+    image: mongo:6.0
     container_name: mongo
     ports:
       - "27017:27017"
@@ -12,12 +12,10 @@ services:
   backend:
     build:
       context: ./backend
-      dockerfile: Dockerfile  
+      dockerfile: Dockerfile
     container_name: backend
     ports:
       - "3000:3000"
-    volumes:
-      - ./backend:/app
     working_dir: /app
     command: node src/index.js
     depends_on:
