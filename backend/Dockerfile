@@ -22,5 +22,6 @@ RUN npm install --include=dev
 # 📁 Kopiujemy resztę backendu
 COPY . .
 
+
 # 🚀 Domyślna komenda
 CMD ["node", "src/index.js"]
